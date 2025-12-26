@@ -1,0 +1,91 @@
+TASK:
+Analyze the code for violations of only these sections guidelines: 1.1.1, 1.1.2, 2.1.1, 2.2.1, 2.3.1, 2.3.2, 2.4.1, 2.5.1, 2.6.1, if no violation is found respond with one single space.
+
+OUTPUT RULES:
+Report each violation exactly as:
+[Error](line number) (violation section number) (how does the token violate the guideline and how can it be fixed complying with the guide(what it should be, follow the guilines when providing these), do not recite the guide, include only the exact offending token in single quotes).
+
+If a token is technically correct but could be more descriptive, or one character, include it as a WARNING, not as an ERROR, and prefix it with [WARNING].
+For example: [Warning](line number) (violation section number) (how does the token violate the guideline and how can it be fixed (what it should be, follow the guilines when providing these), include only the exact offending token in single quotes).
+Report one character or short method, parameter, local variable, constant, non-constant, class or member names that are correctly in upper or lowercase but could be more descriptive should be classified as WARNING.
+
+If you cannot point to a specific token in the code that proves a violation, or there is no actual violation do not report it.
+
+Report the use special prefixes and suffixes for method, parameter, local variable constant, non-constant, class and member names as [ERROR]. 
+
+Report warnings and prefix them with [WARNING], Report errors and prefix them with [ERROR].
+
+CAMEL CASE NAMING GUIDE:
+
+To convert a name into prper camel case:
+
+1- Beginning with the prose form of the name
+
+2- Convert the phrase to plain ASCII and remove any apostrophes. For example, "Müller's algorithm" might become "Muellers algorithm". Divide this result into words, splitting on spaces and any remaining punctuation (typically hyphens).
+    Recommended: if any word already has a conventional camel-case appearance in common usage, split this into its constituent parts (e.g., "AdWords" becomes "ad words"). 
+    Note that a word such as "iOS" is not really in camel case per se; it defies any convention, so this recommendation does not apply. 
+    Now lowercase everything (including acronyms), then uppercase only the first character of each word, to yield upper camel case, or uppercase only the first character ofeach word except the first, to yield lower camel case
+
+3- Finally, join all the words into a single identifier. Note that the casing of the original words is almost entirely disregarded:
+    For example, “XML HTTP request” should be written as XmlHttpRequest, not XMLHTTPRequest.
+    For example, “New customer ID” should be written as newCustomerId, not newCustomerID.
+    For example, “Inner stopwatch” should be written as innerStopwatch, not innerStopWatch.
+    For example, “Supports IPv6 on iOS?” should be written as supportsIpv6OnIos, not supportsIPv6OnIOS.
+    For example, “YouTube importer” should be written as YouTubeImporter, or YoutubeImporter.
+    For example, “Turn on 2SV” should be written as turnOn2sv, not turnOn2Sv.
+    For example, “Guava 33.4.6” should be written as guava33_4_6, not guava3346.
+    For example, “ID Class” should be written as IdClass, not IDClass.
+    For example, “mod add" should be written as "modAdd" not "modadd".
+    For example, “long 2 Array" should be written as "long2Array".
+    For example, "hello class" should be "HelloClass" not "Helloclass"
+    non letter and number characters should not be used. For example "$".
+    
+
+JAVA STYLE GUIDELINES:
+
+Special prefixes(single character before a name) or suffixes (single character after a name) are not used for method, parameter, local variable constant, non-constant, class and member names (For example: xName, yName, AClass, name__, mName, KName are not accepted), and should all be reported as errors.
+
+1- Documentation
+	1.1- javadocs
+		1.1.1- Each Javadoc block begins with a brief summary fragment. This fragment is very important: it is the only part of the text that 
+        appears in certain contexts such as class and method indexes. The fragment is capitalized and punctuated as if it were a complete sentence.
+		1.1.2- Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member that comment is 
+        written as Javadoc instead (using /**)
+            Only raise 1.1.2 if: there is a "//" or block comment describing purpose/behavior of a class or member immediately above, and there is no corresponding Javadoc. do not conflate this with inline comments inside the class or member.
+
+2- Naming Conventions
+	2.1- Class Names
+		2.1.1- Class names are written in UpperCamelCase (refer to camel case naming guide). For example, "Hello", and "HelloClass" are acceptable.Class names are typically nouns or noun phrases. Remember the first letter of each word is capitalized.
+
+	2.2- Method Names
+		2.2.1- Method names are written in lowerCamelCase (refer to camel case naming guide). For example, "sendMessage" or "message" are both acceptable.
+
+	2.3- Constant Names
+		2.3.1- Constant names use UPPER_SNAKE_CASE
+        Constants examples:
+            static final int NUMBER = 5;
+            static final int VARIABLE_2 = 11;
+            static final ImmutableList<String> NAMES = ImmutableList.of("Ed", "Ann");
+            static final Map<String, Integer> AGES = ImmutableMap.of("Ed", 35, "Ann", 32);
+            static final Joiner COMMA_JOINER = Joiner.on(','); // because Joiner is immutable
+            static final SomeMutableType[] EMPTY_ARRAY = {};
+        Not constants examples:
+            static String nonFinal = "non-final";
+            final String nonStatic = "non-static";
+            static final Set<String> mutableCollection = new HashSet<String>();
+            static final ImmutableSet<SomeMutableType> mutableElements = ImmutableSet.of(mutable);
+            static final ImmutableMap<String, SomeMutableType> mutValues = ImmutableMap.of("Ed", mutInstance, "Ann", mutInstance2);
+            static final Logger logger = Logger.getLogger(MyClass.getName());
+            static final String[] nonEmptyArray = {"these", "can", "change"};
+		2.3.2- Non-constant field (member variable) names (static or otherwise) are written in lowerCamelCase (refer to camel case naming guide).
+
+	2.4- Parameter Names
+		2.4.1- Parameter names are written in lowerCamelCase (refer to camel case naming guide).
+
+	2.5- Local Variable Names
+		2.5.1- Local variable names are written in lowerCamelCase (refer to camel case naming guide).For example, "sendMessage", or "message" are all acceptable. Even when final and immutable, local variables are not considered to be constants, and should not be styled as constants.
+
+	2.6- Type Variable Names
+		2.6.1- Each type variable is named in one of two styles: A single capital letter optionally followed by a single numeral (such as E T X T2), or A name in the form used for classes followed by the capital letter T (examples: RequestT FooBarT)
+
+JAVA CODE:
